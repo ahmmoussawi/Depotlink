@@ -1,0 +1,16 @@
+
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>home template inside base</h1>
+    {% for room in rooms%}
+    <h1>{{room.id}} -- <a href="{% url 'room' room.id %}">{{ room.name}}</a></h1>
+    {% endfor %}
+
+    <h1>BrandListing</h1>
+    {% for brand in brands%}
+    <h1>{{brand.id}} -- <a href="{% url 'brand' brand.id %}">{{ brand.name}}</a></h1>
+    {% endfor %}
+
+{% endblock content %}

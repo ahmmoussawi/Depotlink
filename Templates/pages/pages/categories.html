@@ -1,0 +1,40 @@
+{% load static %}
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon f7-icons arrow-back">arrow_left</i>
+        </a>
+      </div>
+      <div class="title">Categories</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="section-title">Your Favorites</div>
+    <swiper-container class="full-width categories-slider" slides-per-view="auto" space-between="10"
+      slides-offset-after="15" slides-offset-before="15" speed="400">
+      {% for brand in brands %}
+      <swiper-slide>
+        <a href="{{brand.id}}" data-href="/categories/" class="link category-slide">{{brand.name}}</a>
+      </swiper-slide>
+      {% endfor %}
+  
+      <swiper-slide>
+        <a href="1" data-href="/post-list/" class="link category-slide">Travel</a>
+      </swiper-slide>
+    </swiper-container>
+    <div class="section-title">{{ brand.name }}</div>
+    <div class="grid grid-cols-2 grid-gap">
+      {% for cat in brand_cat %}
+      <swiper-slide>
+        <a href="{{cat.id}}" data-href="/post-list/" class="category-item link" style="width: 100% !important;">
+          <img src="{{cat.image.url}}" alt="">
+          <div class="category-name">{{ cat.name}}</div>
+        </a>
+      </swiper-slide>
+      {% endfor%}
+    </div>
+  </div>
+</div>
