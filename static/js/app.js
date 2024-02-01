@@ -277,12 +277,24 @@ var app = new Framework7({
       url: "static/pages/pages/single.html",
     },
     {
+      path: "/categories-list/",
+      url: "pages/pages/categories-list.html",
+    },
+    {
+      path: "/offer/",
+      url: "pages/pages/offer.html",
+    },
+    {
+      path: "/item/",
+      url: "pages/pages/item.html",
+    },
+    {
       path: "/create-post/",
       url: "static/pages/pages/create-post.html",
     },
     {
       path: "/movie/",
-      url: "static/pages/pages/movie.html",
+      url: "pages/pages/movie.html",
     },
     {
       path: "/album/",
@@ -315,6 +327,10 @@ var app = new Framework7({
     {
       path: "/search/",
       url: "static/pages/pages/search.html",
+    },
+    {
+      path: "/home/",
+      url: "pages/pages/home.html",
     },
     {
       path: "/notifications/",
@@ -706,8 +722,6 @@ $$(document).on("page:init", function (e) {
 //update 14 swipper
 
 $$("swiper-slide a").on("click", function (e) {
- 
-    console.log($$(this).attr("href"))
     var Id = $$(this).attr("href"); // get the brandid from this att
     e.preventDefault();  // Prevent the default action
     var targetPath = $$(this).attr("data-href");  // Get the target path
@@ -717,7 +731,28 @@ $$("swiper-slide a").on("click", function (e) {
 });
 $$(document).on("page:init", function (e) {
   $$("swiper-slide a").on("click", function (e) {
-    //console.log(" i got here init")
+    //console.log($$(this).attr("href"))
+    var Id = $$(this).attr("href"); // get the brandid from this att
+        e.preventDefault();  // Prevent the default action
+        var targetPath = $$(this).attr("data-href");  // Get the target path
+        var fullPath = targetPath + '?_id=' + Id;  // Construct the full path with query parameter
+        app.views.current.router.navigate(fullPath);
+  });
+});
+
+//featured categories link to items
+$$("dl-routing a").on("click", function (e) {
+ 
+  console.log($$(this).attr("href"))
+  var Id = $$(this).attr("href"); // get the brandid from this att
+  e.preventDefault();  // Prevent the default action
+  var targetPath = $$(this).attr("data-href");  // Get the target path
+  var fullPath = targetPath + '?_id=' + Id;  // Construct the full path with query parameter
+  app.views.current.router.navigate(fullPath);
+
+});
+$$(document).on("page:init", function (e) {
+  $$("dl-routing a").on("click", function (e) {
     console.log($$(this).attr("href"))
     var Id = $$(this).attr("href"); // get the brandid from this att
         e.preventDefault();  // Prevent the default action
@@ -727,6 +762,16 @@ $$(document).on("page:init", function (e) {
    
   });
 });
+//home link
+  $$(document).on("page:init", function (e) {
+    $$("home-link a").on("click", function (e) {
+      e.preventDefault();
+      console.log("i want to go home");
+      app.views.current.router.navigate('/home/'); // Navigate to home page
+     
+    });
+  });
+
 
 
 // 15. Switch Theme

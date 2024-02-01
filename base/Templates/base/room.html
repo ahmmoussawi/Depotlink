@@ -1,9 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Page Image Cover</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("{%  static 'images/homepage.png' %}");
+    background-position: top;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: black;
+  }
+  .content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(27, 8, 114); /* Adjust text color as needed */
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background: rgba(0, 0, 0, 0.5); Optional: Overlay to make text more readable */
+  }
+  /* Additional styles can go here */
+</style>
+</head>
+<body>
 
-{% extends 'main.html' %}
+<div class="overlay">
+  <div class="content">
+    <!-- Your content here. If you want to display something over the image. -->
+  </div>
+</div>
 
-{% block content %}
-
-<h1>{{room.id}}</h1>
-<h2>{{room.name}}</h2>
-
-{% endblock content %}
+</body>
+</html>

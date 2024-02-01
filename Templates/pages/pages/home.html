@@ -115,7 +115,7 @@
                       <img src="{{brand.image.url}}" alt="">
                       <div class="card-movie-rating">
                         <i class="icon f7-icons text-color-yellow">star_fill</i>
-                        4.8/5
+                        {{brand.name}}
                       </div>
                     </div>
                   </a>
@@ -124,11 +124,11 @@
               </swiper-container>
               <div class="section-title">
                 Featured Categories
-                <a href="/album-list/" class="link">View All</a>
+                <a href="/categories-list/" class="link">View All</a>
               </div>
               <div class="grid grid-cols-2 album-grid">
                 {% for category in categories %}
-                <featured-categories style="padding: 7px;">
+                <dl-routing style="padding: 7px;">
                 <a href="{{category.id}}" data-href="/post-list/" class="link">
                   <img src="{{category.image.url}}" alt="">
                   <div class="album-details">
@@ -136,16 +136,18 @@
                     <div class="album-author">{{ category.brand.name}}</div>
                   </div>
                 </a>
-              </featured-categories>
+              </dl-routing>
                 {% endfor %}
               </div>
               <div class="section-title">Don't Miss It!</div>
-              <a href="/single/" class="card">
+              <dl-routing>
+              <a href="{{star_offer.id}}" data-href="/offer/" class="card">
                 <div class="card-image">
-                  <img src="../static/img/cards/8.jpg" alt="">
+                  <img src="{{star_offer.image.url}}" alt="">
                 </div>
               </a>
-              <div class="section-title">
+            </dl-routing>
+              <!-- <div class="section-title">
                 Today's Events
                 <a href="/event-list/" class="link">View All</a>
               </div>
@@ -300,7 +302,7 @@
                   </div>
                   <div class="post-image"><img src="../static/img/post-list/13.jpg" alt=""></div>
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -314,9 +316,9 @@
                     <img src="../static/img/avatars/small-avatar.jpg" alt="">
                   </a>
                 </div>
-                <div class="title">Latest Posts</div>
+                <div class="title">Latest Products</div>
                 <div class="title-large">
-                  <div class="title-large-text">Latest Posts</div>
+                  <div class="title-large-text">Latest Products</div>
                 </div>
                 <div class="right">
                   <a href="#" class="link icon-only switch-theme">
@@ -334,74 +336,42 @@
             <div class="page-content">
               <swiper-container class="full-width" slides-per-view="1.2" space-between="15" slides-offset-after="15"
                 slides-offset-before="15" speed="400">
+                {% for item in items%}
                 <swiper-slide>
-                  <a href="#" data-href="/single/" class="card">
+                  <a href="{{item.id}}" data-href="/post-list/" class="card">
                     <div class="card-image">
-                      <img src="../static/img/cards/1.jpg" alt="">
+                      <img src="{{item.image.url}}" alt="">
                       <div class="card-image-footer">
-                        <div class="card-category bg-color-white">Gaming</div>
-                        <h2>The Exciting Future of Gaming Technology</h2>
+                        <div class="card-category bg-color-white">{{ item.category.brand.name }}</div>
+                        <h2>{{item.name}}</h2>
                       </div>
                     </div>
                   </a>
                 </swiper-slide>
-                <swiper-slide>
-                  <a href="#" data-href="/single/" class="card">
-                    <div class="card-image">
-                      <img src="../static/img/cards/2.jpg" alt="">
-                      <div class="card-image-footer">
-                        <div class="card-category bg-color-white">Movies</div>
-                        <h2>A Guide to the Best Action Movies of All Time</h2>
-                      </div>
-                    </div>
-                  </a>
-                </swiper-slide>
-                <swiper-slide>
-                  <a href="#" data-href="/single/" class="card">
-                    <div class="card-image">
-                      <img src="../static/img/cards/3.jpg" alt="">
-                      <div class="card-image-footer">
-                        <div class="card-category bg-color-white">Food</div>
-                        <h2>The Evolution of Burgers: From Classics to Innovative Creations</h2>
-                      </div>
-                    </div>
-                  </a>
-                </swiper-slide>
+                {% endfor %}
               </swiper-container>
               <div class="section-title">
-                Popular Posts
+                Popular Products
                 <a href="/post-list/" class="link">View All</a>
               </div>
               <div class="post-list">
+                {% for pitem in popular_items %}
                 <a href="/single/" class="link post-horizontal">
                   <div class="infos">
-                    <div class="post-category">Science</div>
-                    <div class="post-title">Majestic King of the Savannah: The Untamed Beauty of
-                      Lions</div>
-                    <div class="post-date">30 minutes ago</div>
+                    <div class="post-category">{{pitem.item}}</div>
+                    <div class="post-title">{{pitem.item.description}}</div>
+                    <div class="post-date">{{pitem.item.hscode}}</div>
                   </div>
-                  <div class="post-image"><img src="../static/img/post-list/2.jpg" alt=""></div>
-                </a>
-                <a href="/single/" class="link post-horizontal">
-                  <div class="infos">
-                    <div class="post-category">Busines</div>
-                    <div class="post-title">From Companions to Protectors: Celebrating the Canine
-                      Species</div>
-                    <div class="post-date">5 days ago</div>
+                  
+                  <div class="post-image"><img src="{{pitem.item.image.url}}" alt=""></div>
+                  <div class="card-movie-rating" style="right:100px;bottom:10px;">
+                    <i class="icon f7-icons text-color-yellow"></i>
+                    {{pitem.item.category.brand}}
                   </div>
-                  <div class="post-image"><img src="../static/img/post-list/7.jpg" alt=""></div>
                 </a>
-                <a href="/single/" class="link post-horizontal">
-                  <div class="infos">
-                    <div class="post-category">Environment</div>
-                    <div class="post-title">Renewable Energy Initiatives Pave the Way for a
-                      Sustainable Future</div>
-                    <div class="post-date">1 week ago</div>
-                  </div>
-                  <div class="post-image"><img src="../static/img/post-list/8.jpg" alt=""></div>
-                </a>
+                {% endfor %}
               </div>
-              <div class="section-title">
+              <!-- <div class="section-title">
                 Popular Authors
                 <a href="/author-list/" class="link">View All</a>
               </div>
@@ -562,7 +532,7 @@
                   <img src="../static/img/categories/5.jpg" alt="">
                   <div class="category-name">Science</div>
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -576,9 +546,9 @@
                     <img src="../static/img/avatars/small-avatar.jpg" alt="">
                   </a>
                 </div>
-                <div class="title">Pages</div>
+                <div class="title">Offers</div>
                 <div class="title-large">
-                  <div class="title-large-text">Pages</div>
+                  <div class="title-large-text">Offers</div>
                 </div>
                 <div class="right">
                   <a href="#" class="link icon-only switch-theme">
@@ -595,7 +565,18 @@
             </div>
 
             <div class="page-content">
-              <div class="light-gray-title">Authentication</div>
+                {% for offer in offers %}
+                <div class="light-gray-title">{{offer.title}}</div>
+                <dl-routing>
+                    <a href="{{offer.id}}" data-href="/offer/" class="ticket-fill ticket-image">
+                        <img src="{{offer.image.url}}" alt="" class="ticket-image-bg">
+                        <div class="ticket-text"></div>
+                        <div class="ticket-discount"></div>
+                        <div class="ticket-description"></div>
+                    </a>
+                </dl-routing>
+                {% endfor %}
+              <!-- <div class="light-gray-title">Authentication</div>
               <div class="list links-list colored-icons-list list-outline list-dividers full-width">
                 <ul>
                   <li>
@@ -758,7 +739,7 @@
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -772,9 +753,9 @@
                     <img src="{% static 'img/avatars/small-avatar.jpg' %}" alt="">
                   </a>
                 </div>
-                <div class="title">Components</div>
+                <div class="title">Who are we?</div>
                 <div class="title-large">
-                  <div class="title-large-text">Components</div>
+                  <div class="title-large-text">Who are we?</div>
                 </div>
                 <div class="right">
                   <a href="#" class="link icon-only switch-theme">
@@ -791,7 +772,49 @@
             </div>
 
             <div class="page-content">
-              <div class="light-gray-title">General</div>
+                <div class="movie-header">
+                    <img src="{{company.image.url}}" alt="" class="movie-cover">
+                    <div class="movie-infos">
+                      <div class="movie-block">
+                        <i class="icon f7-icons">tickets_fill</i>
+                        <div class="movie-block-name">brands</div>
+                        <div class="movie-block-text">Distributor</div>
+                      </div>
+                      <div class="movie-block">
+                        <i class="icon f7-icons">clock_fill</i>
+                        <div class="movie-block-name">Excellence</div>
+                        <div class="movie-block-text">Delivery</div>
+                      </div>
+                      <div class="movie-block">
+                        <i class="icon f7-icons">star_fill</i>
+                        <div class="movie-block-name">Diversity</div>
+                        <div class="movie-block-text">Marketplace</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="album-header">
+                    <div class="album-title">{{company.name}}</div>
+                    <div class="album-artist">Marketplace Gateway</div>
+                  </div>
+                  <h1>About Us</h1>
+                  <p>{{company.description}}</p>
+                  <!-- <h2>Synopsis</h2>
+                  <p>
+                    Chiron grows up in a Miami neighborhood plagued by crime and drug addiction. His single mother, Paula, is
+                    neglectful and addicted to crack. Bullied and withdrawn, Chiron finds guidance from Juan, a drug dealer, and his
+                    girlfriend, Teresa, who
+                    offer him a safe haven from the chaos of his home life. As a teenager, Chiron faces peer pressure and tough
+                    decisions that may determine his future, but with Juan's guidance, he learns to make choices for himself.
+                  </p>
+
+                  <a href="#" class="link link-banner link-chevron bg-color-dark bg-color-black netflix-banner">
+                    <img src="img/icons/netflix.png" alt="">
+                    <div class="link-banner-text">
+                      <div class="link-banner-title">Watch On Netflix</div>
+                      <div class="link-banner-subtitle">Don't miss this incredible movie!</div>
+                    </div>
+                  </a> -->
+              <!-- <div class="light-gray-title">General</div>
               <div class="list links-list colored-icons-list list-outline list-dividers full-width">
                 <ul>
                   <li>
@@ -1093,7 +1116,7 @@
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -1126,7 +1149,7 @@
             </div>
 
             <div class="page-content">
-              <div class="light-gray-title">General</div>
+              <!-- <div class="light-gray-title">General</div>
               <div class="list links-list colored-icons-list full-width list-outline list-dividers">
                 <ul>
                   <li>
@@ -1282,31 +1305,31 @@
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
         <div class="toolbar tabbar tabbar-icons toolbar-bottom">
           <div class="toolbar-inner">
             <a href="#tab-1" class="tab-link tab-link-active">
-              <i class="icon f7-icons">sparkles</i>
+              <i class="icon f7-icons">house</i>
               <span class="tabbar-label">Discover</span>
             </a>
             <a href="#tab-2" class="tab-link">
-              <i class="icon f7-icons">rocket</i>
-              <span class="tabbar-label">News</span>
+              <i class="icon f7-icons">cube</i>
+              <span class="tabbar-label">Featured</span>
             </a>
             <a href="#tab-3" class="tab-link">
-              <i class="icon f7-icons">doc_richtext</i>
-              <span class="tabbar-label">Pages</span>
+              <i class="icon f7-icons">wand_rays</i>
+              <span class="tabbar-label">Offers</span>
             </a>
             <a href="#tab-4" class="tab-link">
-              <i class="icon f7-icons">rectangle_on_rectangle_angled</i>
-              <span class="tabbar-label">Components</span>
+              <i class="icon f7-icons">exclamationmark_circle</i>
+              <span class="tabbar-label">About Us</span>
             </a>
             <a href="#tab-5" class="tab-link">
-              <i class="icon f7-icons">layers_alt</i>
-              <span class="tabbar-label">Features</span>
+              <i class="icon f7-icons">person</i>
+              <span class="tabbar-label">Contact Us</span>
             </a>
           </div>
         </div>
